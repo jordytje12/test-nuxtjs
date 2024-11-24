@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   ssr: true,
+  nitro: {
+    prerender: {
+      routes: ['/', '/product', '/contact'],
+      ignore: ['']
+    }
+  },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
