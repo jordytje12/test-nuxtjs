@@ -1,5 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // ~/nuxt.config.ts
+
+    modules: [
+      '@konkonam/nuxt-shopify',
+    ],
+  shopify: {
+    name: 'sjehpf-ax',
+    clients: {
+      storefront: {
+        apiVersion: '2024-10',
+        publicAccessToken: '6d19ff718ae3e9e780f7c38e1218fd9b',
+      },
+    },
+  },
+
   compatibilityDate: '2024-11-01',
   ssr: true,
   nitro: {
@@ -21,6 +36,9 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
-    pageTransition: {name: 'page', mode: 'in-out'}
   },
 })
+
+
+
+
