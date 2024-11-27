@@ -22,7 +22,7 @@
               Home
             </NuxtLink>
             <NuxtLink
-                to="/product"
+                to="/products"
                 class="text-gray-800 hover:text-gray-600 font-medium transition"
             >
               Product

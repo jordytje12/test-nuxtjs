@@ -2,6 +2,7 @@ export interface Product {
     id: string;
     title: string;
     description: string;
+    handle: string;
     priceRange: {
         minVariantPrice: {
             amount: string;
@@ -29,23 +30,26 @@ export interface ShopifyResponse {
         };
     };
 }
+
 export interface ShopifyProductResponse {
-    product: {
-        id: string;
-        title: string;
-        description: string;
-        images: {
-            edges: {
-                node: {
-                    url: string;
-                    altText: string | null;
+    data: {
+        product: {
+            id: string;
+            title: string;
+            description: string;
+            priceRange: {
+                minVariantPrice: {
+                    amount: string;
+                    currencyCode: string;
                 };
-            }[];
-        };
-        priceRange: {
-            minVariantPrice: {
-                amount: string;
-                currencyCode: string;
+            };
+            images: {
+                edges: {
+                    node: {
+                        url: string;
+                        altText: string | null;
+                    };
+                }[];
             };
         };
     };
