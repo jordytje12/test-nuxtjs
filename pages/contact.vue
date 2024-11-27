@@ -8,6 +8,8 @@
   <AppAlert>
     This is an auto-imported component
   </AppAlert>
+
+  <MyThreeComponent />
 </template>
 
 <style scoped>
