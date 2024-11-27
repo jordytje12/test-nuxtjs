@@ -3,7 +3,9 @@ import AppHeader from "~/components/AppHeader.vue";
 import { useFetch } from "#imports";
 import type { ShopifyResponse } from '~/types/shopify';
 
-const { data: products, error } = await useFetch<ShopifyResponse>('/api/products?first=8');
+const { data: products, error } = await useFetch<ShopifyResponse>('/api/products?first=8', {
+  server: true,
+});
 
 </script>
 
