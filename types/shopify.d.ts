@@ -54,3 +54,33 @@ export interface ShopifyProductResponse {
         };
     };
 }
+export interface Collection {
+    id: string;
+    title: string;
+    description: string;
+    handle: string;
+    image: {
+        src: string;
+        altText: string | null;
+    };
+    products: {
+        nodes: Product[];
+    };
+}
+
+export interface ShopifyCollectionsResponse {
+    data: {
+        collections: {
+            edges: {
+                node: Collection;
+            }[];
+        };
+    };
+}
+
+export interface ShopifyCollectionResponse {
+    data: {
+        collection: Collection;
+    };
+}
+

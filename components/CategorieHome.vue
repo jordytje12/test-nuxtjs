@@ -1,49 +1,34 @@
 <script setup lang="ts">
+import { useFetch } from "#imports";
+import type {ShopifyCollectionsResponse} from "~/types/shopify";
+
+const { data: collections, error } = await useFetch<ShopifyCollectionsResponse>('/api/collections?first=3', {
+  server: true,
+});
 
 </script>
 
 <template>
-  <div class="bg-gray-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-        <h2 class="text-2xl font-bold text-gray-900">Collections</h2>
+  <h1 class="text-2xl font-bold underline">Collections</h1>
 
-        <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <div class="group relative">
-            <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-            <h3 class="mt-6 text-sm text-gray-500">
-              <a href="#">
-                <span class="absolute inset-0"></span>
-                Desk and Office
-              </a>
-            </h3>
-            <p class="text-base font-semibold text-gray-900">Work from home accessories</p>
-          </div>
-          <div class="group relative">
-            <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg" alt="Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant." class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-            <h3 class="mt-6 text-sm text-gray-500">
-              <a href="#">
-                <span class="absolute inset-0"></span>
-                Self-Improvement
-              </a>
-            </h3>
-            <p class="text-base font-semibold text-gray-900">Journals and note-taking</p>
-          </div>
-          <div class="group relative">
-            <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg" alt="Collection of four insulated travel bottles on wooden shelf." class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-            <h3 class="mt-6 text-sm text-gray-500">
-              <a href="#">
-                <span class="absolute inset-0"></span>
-                Travel
-              </a>
-            </h3>
-            <p class="text-base font-semibold text-gray-900">Daily commute essentials</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <template v-if="collections">
+    <ul class="grid grid-cols-3 gap-5">
+      <li v-for="collection in collections.data.collections.edges" :key="collection.node.id" class="">
+        <img :src="collection.node.image?.src" :alt="collection.node.image?.altText || ''" class="h-64 object-cover min-w-full"/>
+        <h2 class="font-semibold">{{ collection.node.title }}</h2>
+        <p>{{ collection.node.description }}</p>
+        <NuxtLink :to="`/collections/${collection.node.handle}`">View Collection</NuxtLink>
+      </li>
+    </ul>
+  </template>
 
+  <template v-else-if="error">
+    <p class="text-red-500">Error loading collections: {{ error }}</p>
+  </template>
+
+  <template v-else>
+    <p>Loading...</p>
+  </template>
 </template>
 
 <style scoped>
