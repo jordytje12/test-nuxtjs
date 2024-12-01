@@ -1,23 +1,18 @@
 <script setup lang="ts">
-import { useFetch } from "#imports";
-import type {ShopifyCollectionsResponse} from "~/types/shopify";
 
-const { data: collections, error } = await useFetch<ShopifyCollectionsResponse>('/api/collections?first=3', {
-  server: true,
-});
 
 </script>
 
 <template>
-  <h1 class="text-2xl font-bold underline max-w-7xl mx-auto">Collections</h1>
+  <h1 class="text-2xl font-bold underline max-w-7xl mx-auto pt-28 pb-5">Collections</h1>
 
   <template v-if="collections">
-    <ul class="grid grid-cols-3 gap-5 max-w-7xl mx-auto">
-      <li v-for="collection in collections.data.collections.edges" :key="collection.node.id" class="">
-        <img :src="collection.node.image?.src" :alt="collection.node.image?.altText || ''" class="h-64 object-cover min-w-full"/>
+    <ul class="grid grid-cols-3 gap-5 max-w-7xl mx-auto pb-28">
+      <li v-for="collection in collections.data.collections.edges" :key="collection.node.id" class="space-y-2.5">
+        <img :src="collection.node.image?.src" :alt="collection.node.image?.altText || ''" class="h-64 object-cover min-w-full rounded"/>
         <h2 class="font-semibold">{{ collection.node.title }}</h2>
-        <p>{{ collection.node.description }}</p>
-        <NuxtLink :to="`/collections/${collection.node.handle}`">View Collection</NuxtLink>
+        <p class="pb-5">{{ collection.node.description }}</p>
+        <NuxtLink :to="`/collections/${collection.node.handle}`" class=" underline underline-offset-8">View Collection</NuxtLink>
       </li>
     </ul>
   </template>
