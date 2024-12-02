@@ -2,15 +2,16 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo'],
-
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: 'https://spacex-production.up.railway.app', // Vervang met jouw endpoint
-      },
+  modules: ['@nuxtjs/tailwindcss',],
+  compatibilityDate: '2024-12-02',
+  app: {
+    head: {
+      script: [
+        {
+          type: 'module',
+          src: 'https://unpkg.com/@splinetool/viewer@1.9.47/build/spline-viewer.js',
+        },
+      ],
     },
   },
-
-  compatibilityDate: '2024-11-30',
 });

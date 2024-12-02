@@ -19,6 +19,7 @@
     "@shopify/storefront-api-client": "^1.0.3",
     "@vue/apollo-option": "^4.2.0",
     "graphql": "^16.9.0",
+    "gsap": "^3.12.5",
     "nuxt": "^3.1.2",
     "nuxt-graphql-client": "^0.2.41",
     "nuxt-shopify": "^1.19.0",
